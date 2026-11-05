@@ -292,7 +292,7 @@ function buildVillages(rows,month){
     const tb=(row['ตำบล']||'').trim(), moo=(row['หมู่ที่']||'').trim();
     const name=(row['ชื่อหมู่บ้าน']||'').trim() || (tb+' หมู่ '+moo);
     if(!tb) return;
-    const key=tb+'|'+moo+'|'+name;
+    const key=tb+'|'+(parseInt(moo,10)||moo);   // ใช้ ตำบล+หมู่ที่ เป็นตัวระบุ ไม่ใช้ชื่อ (กันพิมพ์ชื่อไม่ตรงกัน)
     if(!map.has(key)) map.set(key,{tambon:tb,moo,name,all:[],records:[],lat:NaN,lng:NaN});
     const v=map.get(key);
     const la=parseFloat(row['Latitude']||row['ละติจูด']), ln=parseFloat(row['Longitude']||row['ลองจิจูด']);
